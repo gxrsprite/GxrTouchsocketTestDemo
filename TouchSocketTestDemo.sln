@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTcpServer", "Console
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NativeMemoryArray", "NativeMemoryArray\NativeMemoryArray.csproj", "{9A916D34-1A7B-E72E-9DAF-CA694C9046D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReliableProtocalSingle", "ReliableProtocalSingle\ReliableProtocalSingle.csproj", "{B2023121-875A-4598-AF62-D395872703CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{9A916D34-1A7B-E72E-9DAF-CA694C9046D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A916D34-1A7B-E72E-9DAF-CA694C9046D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A916D34-1A7B-E72E-9DAF-CA694C9046D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2023121-875A-4598-AF62-D395872703CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2023121-875A-4598-AF62-D395872703CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2023121-875A-4598-AF62-D395872703CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2023121-875A-4598-AF62-D395872703CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
