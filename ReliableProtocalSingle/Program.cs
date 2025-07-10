@@ -34,6 +34,10 @@ namespace ReliableProtocolExample
             var server = new TcpService();
             await server.SetupAsync(new TouchSocketConfig()
                 .SetListenIPHosts("127.0.0.1:7789")
+                .SetAdapterOption(new AdapterOption()
+                {
+                    MaxPackageSize = int.MaxValue
+                })
                 .SetTcpDataHandlingAdapter(() =>
                 {
                     return new MyCustomAdapter();
@@ -55,7 +59,7 @@ namespace ReliableProtocolExample
 
                 }
             };
-            server.Start();
+            await server.StartAsync();
             Console.WriteLine("Server started.");
             Console.ReadLine();
         }
@@ -90,18 +94,19 @@ namespace ReliableProtocolExample
             await client.ConnectAsync();
 
             // 模拟大数据发送
-            byte[] bigData = new byte[100 * 1024 * 1024];
+            byte[] bigData = new byte[101 * 1024 * 1024];
             new Random().NextBytes(bigData);
             var guid = Guid.NewGuid();
-            int chunkSize = 10 * 1024 * 1024 + 100000;//
+            int chunkSize = 20 * 1024 * 1024;//
             uint seq = 0;
             for (long offset = 0; offset < bigData.Length; offset += chunkSize, seq++)
             {
                 long len = Math.Min(chunkSize, bigData.Length - offset);
                 byte[] payload = new byte[len];
                 Array.Copy(bigData, offset, payload, 0, len);
-
-                var packet = DataRequestInfo.Build(seq, 0x00, payload, (ulong)bigData.Length, (uint)(bigData.Length / chunkSize), guid, 1);
+                double count = (double)bigData.Length / chunkSize;
+                uint totalcount = (uint)Math.Round(count, MidpointRounding.ToPositiveInfinity);
+                var packet = DataRequestInfo.Build(seq, 0x00, payload, (ulong)bigData.Length, totalcount, guid, 1);
                 bool success = false;
                 for (int retry = 0; retry < 3 && !success; retry++)
                 {
